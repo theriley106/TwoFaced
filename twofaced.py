@@ -17,6 +17,9 @@ def returnDevices():
 def currentApps(device):
 	return sendSystemCommand('adb -s {} shell dumpsys activity'.format(device))
 
+def ForceClose(udid, app):
+	runCommand('adb -s {} shell am force-stop {}'.format(udid, app))
+
 def startApp(device, app):
 	sendSystemCommand('adb -s {} shell monkey -p {} -c android.intent.category.LAUNCHER 1'.format(device, app))
 
@@ -65,5 +68,5 @@ if __name__ == "__main__":
 			else:
 				bounds = randomBounds(coords, True)
 			os.system('adb -s {} shell input swipe {}'.format(device, ' '.join(bounds)))
-			time.sleep(random.randint(1,7))
+			#time.sleep(random.randint(1,7))
 
